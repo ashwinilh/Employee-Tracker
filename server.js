@@ -26,6 +26,7 @@ async function mainPrompt() {
             break;
 
         case 'Remove Employee':
+            removeEmployee();
             break;
 
         case 'Update employee role':
@@ -104,6 +105,33 @@ async function addEmployee() {
     viewAllEmployees();
 }
 
+// Remove employee
+async function removeEmployee() {
+	const employeeResult = await db.getEmployees();
+	let employeeNames = [];
+	for (let i = 0; i < employeeResult.length; i++) {
+		employeeNames.push(
+			employeeResult[i].first_name + " " + employeeResult[i].last_name
+		);
+	}
+	let removeEmpPrompt = [];
+	removeEmpPrompt.push({
+		type: "list",
+		name: "empName",
+		message: "Which employee to remove?",
+		choices: employeeNames,
+	});
+	const { empName } = await inquirer.prompt(removeEmpPrompt);
+	const empFirstName = empName.split(" ")[0];
+	const empLastName = empName.split(" ")[1];
+	const empId = employeeResult.filter(
+		(employee) =>
+			employee.first_name === empFirstName &&
+			employee.last_name === empLastName
+	)[0].id;
+	const removeEmployeeResult = await db.removeEmployee(empId);
+	viewAllEmployees();
+}
 
 function init() {
 
