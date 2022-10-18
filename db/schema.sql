@@ -37,7 +37,16 @@ CREATE TABLE role(
     PRIMARY KEY(id)
 );
 
+-- Create department table --
+CREATE TABLE department(
+	id INT NOT NULL AUTO_INCREMENT,
+    name VARCHAR(30),
+    PRIMARY KEY(id)
+);
+
 
 SELECT * FROM employee;
 
 SELECT * FROM role;
+
+SELECT * FROM department;
