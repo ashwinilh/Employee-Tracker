@@ -15,5 +15,20 @@ module.exports = {
                 'Exit'
             ]
         }
-    ] 
+    ],
+    
+    // Questions for add employee
+    addEmployee: [
+        {
+            type: 'input',
+            name: 'firstName',
+            message: "Employee's first name?"
+        },
+        {
+            type: 'input',
+            name: 'lastName',
+            message: "Employee's last name?"
+        }
+    ]
+
 };
