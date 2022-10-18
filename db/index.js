@@ -96,10 +96,10 @@ class DB {
         }
     }
 
-     // View all employees.
-	viewAllEmployees() {
-		return this.connection.query(
-			`SELECT
+    // View all employees.
+    viewAllEmployees() {
+        return this.connection.query(
+            `SELECT
                 e1.id AS ID,
                 e1.first_name AS First_Name,
                 e1.last_name AS Last_Name,
@@ -116,8 +116,57 @@ class DB {
 		    LEFT JOIN department ON role.department_id = department.id
 		    ORDER BY
                 e1.id;`
-		);
+        );
     }
+
+    // Update employee role
+    updateEmployeeRole(empId, roleId) {
+        try {
+            // UPDATE employee SET role_id = 4 WHERE id = 4;
+            this.connection.query(
+                "UPDATE employee SET ? Where ?",
+                [
+                    {
+                        role_id: roleId,
+                    },
+                    {
+                        id: empId,
+                    },
+                ],
+                function (error) {
+                    if (error) throw err;
+                    console.log(`\nUpdated employee's role successfully!`);
+                }
+            );
+        } catch (err) {
+            if (err) throw err;
+        }
+    }
+
+    // Update employee manager
+    updateEmployeeManager(empId, managerId) {
+        //UPDATE employee SET manager_id = 2 WHERE id = 3;
+        try {
+            this.connection.query(
+                "UPDATE employee SET ? WHERE ?",
+                [
+                    {
+                        manager_id: managerId,
+                    },
+                    {
+                        id: empId,
+                    },
+                ],
+                function (error) {
+                    if (error) throw error;
+                    console.log(`\nUpdated employee's manager successfully!`);
+                }
+            );
+        } catch (error) {
+            if (error) throw error;
+        }
+    }
+
     // Close database connection
     closeConnection() {
         try {
