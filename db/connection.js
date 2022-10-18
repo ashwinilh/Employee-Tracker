@@ -8,9 +8,13 @@ const connection = mysql.createConnection({
     //password
     password : 'mysqlpass',
     // database name to connect with
-    database : 'employee_tracker_db'
+    database : 'employee_DB'
 });
 
 connection.connect(function(err){
     if(err) throw err;
 });
+
+connection.query = util.promisify(connection.query);
+
+module.exports = connection;
