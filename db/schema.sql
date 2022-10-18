@@ -23,3 +23,21 @@ CREATE TABLE employee(
         ON DELETE CASCADE,
     PRIMARY KEY (id)
 );
+
+-- Create employee roles table --
+CREATE TABLE role(
+	id INT NOT NULL AUTO_INCREMENT,
+    title VARCHAR(30) NOT NULL, 
+    salary DECIMAL,
+    department_id INT,
+    CONSTRAINT fk_department FOREIGN KEY (department_id) 
+    REFERENCES department(id)
+		ON UPDATE CASCADE
+        ON DELETE CASCADE,
+    PRIMARY KEY(id)
+);
+
+
+SELECT * FROM employee;
+
+SELECT * FROM role;
