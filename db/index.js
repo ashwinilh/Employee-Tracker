@@ -167,6 +167,29 @@ class DB {
         }
     }
 
+    // Get all roles
+	getRoles() {
+		try {
+			return this.connection.query(
+				`SELECT * FROM role;`
+			);
+		} catch (err) {
+			if (err) throw err;
+		}
+	}
+
+      // Get all employees
+	getEmployees() {
+		try {
+			return this.connection.query(
+				`SELECT * FROM employee;`
+			);
+		} catch (err) {
+			if (err) throw err;
+		}
+	}
+
+
     // Close database connection
     closeConnection() {
         try {
